@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Cards</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom color scheme */
+        .bg-python-purple {
+            background-color: #d16de3;
+        }
+        .bg-card-offwhite {
+            background-color: #FFFFFF; /* Subtle off-white */
+        }
+        .text-python-purple {
+            color: #d16de3;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #d16de3;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        .language-toggle select {
+            background-color: white;
+            color: black;
+            font-size: 1rem;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+        .language-toggle label {
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-stone-600 text-gray-900 p-1">
+
+    <!-- Language Toggle -->
+    <div class="language-toggle" role="region" aria-labelledby="languageSelectLabel">
+        <label id="languageSelectLabel" for="languageSelect">Language:</label>
+        <select id="languageSelect" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+
+    <!-- How the Course Works Section (dynamically populated) -->
+    <section id="course-info" class="bg-python-purple shadow-md rounded-lg p-6 text-white mb-4" role="region" aria-labelledby="courseTitle">
+        <!-- Content will be injected here -->
+    </section>
+
+    <!-- JSON content and JavaScript -->
+    <script>
+        // JSON data with translations for English, Spanish, and French
+        const courseContent = {
+            "en": {
+                "title": "How the Course Works",
+                "description": "You might think this course would be typical. But, to quote the Spanish Inquisition: \"Nobody expects...\" well, anything in this course to be typical. Each week, you will be introduced to new absurdities, surprise lessons, and sudden diversions (like a discussion about coconuts). Be prepared to laugh, analyze, and eventually create your own Monty Python-inspired content.",
+                "sections": [
+                    {
+                        "title": "Learn at Your Own Pace",
+                        "description": "Access the course content anytime through our platform. No need to rush—absurdity takes time.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1"
+                    },
+                    {
+                        "title": "Weekly Assignments",
+                        "description": "Each week includes assignments to help you create your own absurd, nonsensical, yet brilliant sketches.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1"
+                    },
+                    {
+                        "title": "Collaborative Projects",
+                        "description": "Join forces with fellow students to brainstorm absurd concepts, like how many people it takes to carry a coconut.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1"
+                    },
+                    {
+                        "title": "Feedback and Support",
+                        "description": "Receive weekly feedback from the instructor. Don’t worry, we won’t ask for a shrubbery.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669418_1"
+                    }
+                ]
+            },
+            "es": {
+                "title": "Cómo Funciona el Curso",
+                "description": "Podrías pensar que este curso sería típico. Pero, citando a la Inquisición Española: \"Nadie espera...\" bueno, nada en este curso será típico. Cada semana serás introducido a nuevas absurdidades, lecciones sorpresa y desvíos repentinos (como una discusión sobre cocos). Prepárate para reír, analizar y eventualmente crear tu propio contenido inspirado en Monty Python.",
+                "sections": [
+                    {
+                        "title": "Aprende a Tu Propio Ritmo",
+                        "description": "Accede al contenido del curso en cualquier momento a través de nuestra plataforma. No necesitas apresurarte; la absurdidad lleva tiempo.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1"
+                    },
+                    {
+                        "title": "Tareas Semanales",
+                        "description": "Cada semana incluye tareas para ayudarte a crear tus propios sketches absurdos, sin sentido y brillantes.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1"
+                    },
+                    {
+                        "title": "Proyectos Colaborativos",
+                        "description": "Únete a otros estudiantes para desarrollar conceptos absurdos, como cuántas personas se necesitan para llevar un coco.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1"
+                    },
+                    {
+                        "title": "Retroalimentación y Soporte",
+                        "description": "Recibe retroalimentación semanal del instructor. No te preocupes, no te pediremos un arbusto.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669418_1"
+                    }
+                ]
+            },
+            "fr": {
+                "title": "Comment Fonctionne le Cours",
+                "description": "Vous pourriez penser que ce cours serait typique. Mais, pour citer l'Inquisition Espagnole: \"Personne ne s'attend à...\" eh bien, rien dans ce cours ne sera typique. Chaque semaine, vous serez introduit à de nouvelles absurdités, des leçons surprises et des détours soudains (comme une discussion sur les noix de coco). Préparez-vous à rire, analyser et finalement créer votre propre contenu inspiré de Monty Python.",
+                "sections": [
+                    {
+                        "title": "Apprenez à Votre Propre Rythme",
+                        "description": "Accédez au contenu du cours à tout moment via notre plateforme. Pas besoin de vous presser — l'absurdité prend du temps.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1"
+                    },
+                    {
+                        "title": "Devoirs Hebdomadaires",
+                        "description": "Chaque semaine inclut des devoirs pour vous aider à créer vos propres sketches absurdes et brillants.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1"
+                    },
+                    {
+                        "title": "Projets Collaboratifs",
+                        "description": "Joignez vos forces à celles de vos camarades pour imaginer des concepts absurdes, comme combien de personnes il faut pour porter une noix de coco.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1"
+                    },
+                    {
+                        "title": "Retour d'Information et Soutien",
+                        "description": "Recevez des retours hebdomadaires de l'instructeur. Ne vous inquiétez pas, nous ne vous demanderons pas un buisson.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669418_1"
+                    }
+                ]
+            }
+        };
+
+        // Default language
+        let currentLanguage = "en";
+
+        // Function to populate the course content dynamically
+        function populateCourseContent() {
+            const courseSection = document.getElementById("course-info");
+            const locale = courseContent[currentLanguage];
+
+            // Clear previous content
+            courseSection.innerHTML = '';
+
+            // Set the title and description
+            courseSection.innerHTML += `
+                <h2 class="text-4xl font-semibold mb-6 text-center" id="courseTitle" aria-label="${locale.title}">${locale.title}</h2>
+                <p class="text-lg leading-relaxed text-center mb-6">${locale.description}</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl mx-auto" role="list" aria-label="Course Features">
+                    ${locale.sections.map(section => `
+                        <div class="flex flex-col lg:flex-row items-center bg-card-offwhite text-black rounded-lg p-6 shadow-md" role="listitem" aria-label="${section.title}">
+                            <img src="${section.image}" alt="${section.title}" class="w-24 h-24 sm:w-32 sm:h-32 mb-4 rounded-lg lg:mb-0 lg:mr-6 object-cover" aria-hidden="true">
+                            <div>
+                                <h3 class="text-xl font-bold">${section.title}</h3>
+                                <p>${section.description}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Event listener for language change
+        document.getElementById("languageSelect").addEventListener("change", function(event) {
+            currentLanguage = event.target.value;
+            populateCourseContent();
+        });
+
+        // Populate the content initially
+        document.addEventListener("DOMContentLoaded", populateCourseContent);
+    </script>
+
+</body>
+</html>

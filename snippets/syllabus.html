@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Card</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 4px;
+            border-radius: 5px;
+        }
+        .language-toggle select {
+            background-color: white;
+            color: black;
+            font-size: 0.9rem;
+            padding: 2px 5px;
+            border: none;
+            border-radius: 3px;
+        }
+        .title-purple {
+            color: #d16de3; /* Purple color */
+            text-align: left;
+        }
+        .sub-bullet {
+            list-style-type: circle;
+            margin-left: 2rem;
+        }
+    </style>
+</head>
+<body id="body" class="bg-stone-600 text-gray-900 p-1">
+
+    <!-- Language Toggle -->
+    <div class="language-toggle" role="region" aria-labelledby="languageSelectLabel">
+        <label id="languageSelectLabel" for="languageSelect" class="sr-only">Language:</label>
+        <select id="languageSelect" aria-label="Select language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+
+    <!-- Syllabus Section -->
+    <section id="syllabus" class="shadow-md rounded-lg p-6 mb-4 border" role="region" aria-labelledby="syllabusTitle">
+        <!-- Content will be injected here -->
+    </section>
+
+    <!-- JSON content and JavaScript -->
+    <script>
+        const syllabusContent = {
+            "colors": {
+                "background": "#d16de3",  // Purple for the background
+                "text": "#FFFFFF",         // White text
+                "cardBackground": "#FFFFFF", // White card background
+                "cardText": "#000000",       // Black text for the card
+                "border": "#ad4bb4"          // Border color for the card
+            },
+            "en": {
+                "title": "Syllabus",
+                "sections": [
+                    {
+                        "text": "Introduction to Absurdity",
+                        "details": [
+                            "An overview of surreal humor.",
+                            "Examples of absurdity in different cultures."
+                        ]
+                    },
+                    {
+                        "text": "Creating Surreal Comedy",
+                        "details": [
+                            "Explore comedic timing in surreal humor.",
+                            "How to blend the unexpected with meaningful content."
+                        ]
+                    }
+                ]
+            },
+            "es": {
+                "title": "Plan de Estudio",
+                "sections": [
+                    {
+                        "text": "Introducción al Absurdo",
+                        "details": [
+                            "Una visión general del humor surrealista.",
+                            "Ejemplos de absurdidad en diferentes culturas."
+                        ]
+                    },
+                    {
+                        "text": "Creación de Comedia Surrealista",
+                        "details": [
+                            "Explorar el tiempo cómico en el humor surrealista.",
+                            "Cómo combinar lo inesperado con contenido significativo."
+                        ]
+                    }
+                ]
+            },
+            "fr": {
+                "title": "Programme",
+                "sections": [
+                    {
+                        "text": "Introduction à l'Absurd",
+                        "details": [
+                            "Un aperçu de l'humour surréaliste.",
+                            "Exemples d'absurdité dans différentes cultures."
+                        ]
+                    },
+                    {
+                        "text": "Création de Comédie Surréaliste",
+                        "details": [
+                            "Explorer le timing comique dans l'humour surréaliste.",
+                            "Comment mélanger l'inattendu avec du contenu significatif."
+                        ]
+                    }
+                ]
+            }
+        };
+
+        let currentLanguage = "en"; // Default language
+
+        function applyColors(colors) {
+            document.getElementById("body").style.backgroundColor = colors.background;
+            document.getElementById("body").style.color = colors.text;
+            const section = document.getElementById("syllabus");
+            section.style.backgroundColor = colors.cardBackground;
+            section.style.color = colors.cardText;
+            section.style.borderColor = colors.border;
+        }
+
+        function populateSyllabus() {
+            const section = document.getElementById("syllabus");
+            const locale = syllabusContent[currentLanguage];
+
+            // Apply colors
+            applyColors(syllabusContent.colors);
+
+            // Clear previous content
+            section.innerHTML = '';
+
+            // Inject the title and the SVG + sections inside the flexbox
+            section.innerHTML += `
+                <h2 class="text-3xl font-semibold title-purple mb-3" id="syllabusTitle" aria-label="${locale.title}">${locale.title}</h2>
+                <div class="flex flex-col lg:flex-row items-center lg:space-x-8 max-w-6xl mx-auto">
+                    <!-- SVG Trophy Icon -->
+                    <div class="w-40 h-40 mb-6 lg:mb-0 lg:w-48 lg:h-48 flex justify-center items-center">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 508 508" xml:space="preserve" fill="#000000" class="w-full h-full">
+                            <circle style="fill:#de90df;" cx="254" cy="254" r="254"></circle>
+                            <path style="fill:#9a2d91;" d="M53.2,409.2C99.6,469.2,172.4,508,254,508s154.4-38.8,200.8-98.8H53.2z"></path>
+                            <path style="fill:#324A5E;" d="M105.2,309.2v60.4c0,12.4,10,22,22,22h277.6c4.8,0,8.8,4,8.8,8.8l0,0c0,4.8-4,8.8-8.8,8.8H127.2 c-22,0-39.6-17.6-39.6-39.6v-60.4c0-22,17.6-39.6,39.6-39.6h277.6c4.8,0,8.8,4,8.8,8.8l0,0c0,4.8-4,8.8-8.8,8.8H127.2 C115.2,286.8,105.2,296.8,105.2,309.2z"></path>
+                            <path style="fill:#FFFFFF;" d="M398.8,339.2c0,20,2.8,38.4,7.2,52.4H127.2c-12.4,0-22-10-22-22v-60.4c0-12,10-22,22-22H406 C401.2,300.8,398.8,319.2,398.8,339.2z"></path>
+                            <g>
+                                <path style="fill:#E6E9EE;" d="M402.4,301.2c-0.4,0.8-0.4,2-0.4,3.2H106c0.4-1.2,0.4-2,0.8-3.2H402.4z"></path>
+                                <path style="fill:#E6E9EE;" d="M400,315.6c0,0.8-0.4,2-0.4,3.2H105.2v-3.2H400z"></path>
+                                <path style="fill:#E6E9EE;" d="M398.8,330.4c0,1.2,0,2,0,3.2H105.2v-3.2H398.8z"></path>
+                                <path style="fill:#E6E9EE;" d="M398.8,348H105.2v-3.2h293.6C398.8,346,398.8,347.2,398.8,348z"></path>
+                                <path style="fill:#E6E9EE;" d="M400,362.8H105.2v-3.2h294.4C399.6,360.8,400,362,400,362.8z"></path>
+                                <path style="fill:#E6E9EE;" d="M402.4,377.6H106.8c-0.4-0.8-0.8-2-0.8-3.2h296C402,375.6,402,376.4,402.4,377.6z"></path>
+                            </g>
+                            <path style="fill:#FF7058;" d="M83.2,191.6v46.8c0,9.6,7.6,17.2,17.2,17.2h214.8c3.6,0,6.8,3.2,6.8,6.8l0,0c0,3.6-3.2,6.8-6.8,6.8 H100.4c-16.8,0-30.8-13.6-30.8-30.8v-46.8c0-16.8,13.6-30.8,30.8-30.8h214.8c3.6,0,6.8,3.2,6.8,6.8l0,0c0,3.6-3.2,6.8-6.8,6.8H100.4 C90.8,174.8,83.2,182.4,83.2,191.6z"></path>
+                            <path style="fill:#FFFFFF;" d="M310.4,215.2c0,15.6,2,29.6,5.6,40.4H100.4c-9.6,0-17.2-7.6-17.2-17.2v-46.8 c0-9.6,7.6-17.2,17.2-17.2h215.2C312.4,185.6,310.4,199.6,310.4,215.2z"></path>
+                            <g>
+                                <path style="fill:#E6E9EE;" d="M312.8,185.6c0,0.8-0.4,1.6-0.4,2.4H83.6c0-0.8,0.4-1.6,0.8-2.4H312.8z"></path>
+                                <path style="fill:#E6E9EE;" d="M311.2,196.8c0,0.8,0,1.6-0.4,2.4H83.2v-2.4H311.2z"></path>
+                                <path style="fill:#E6E9EE;" d="M310.4,208.4c0,0.8,0,1.6,0,2.4H83.2v-2.4H310.4z"></path>
+                                <path style="fill:#E6E9EE;" d="M310.4,222H83.2v-2.4h227.2C310.4,220.4,310.4,221.2,310.4,222z"></path>
+                                <path style="fill:#E6E9EE;" d="M311.2,233.2h-228v-2.4h227.6C311.2,232,311.2,232.8,311.2,233.2z"></path>
+                                <path style="fill:#E6E9EE;" d="M312.8,244.8H84.4c-0.4-0.8-0.4-1.6-0.8-2.4h228.8C312.8,243.2,312.8,244,312.8,244.8z"></path>
+                            </g>
+                            <rect x="312.343" y="198.873" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 696.2315 143.7574)" style="fill:#2B3B4E;" width="12" height="34.4"></rect>
+                            <circle style="fill:#324A5E;" cx="260.4" cy="158" r="83.2"></circle>
+                            <circle style="fill:#84DBFF;" cx="260.4" cy="158" r="66.4"></circle>
+                            <path style="fill:#FFFFFF;" d="M334.4,219.6L322,232c-2,2-2,5.6,0,7.6l94.8,94.8c2,2,5.6,2,7.6,0l12.4-12.4c2-2,2-5.6,0-7.6 L342,219.6C340,217.6,336.4,217.6,334.4,219.6z"></path>
+                            <rect x="326.93" y="263.017" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 452.359 741.4069)" style="fill:#FF7058;" width="105.599" height="28"></rect>
+                        </svg>
+                    </div>
+
+                    <!-- Text Content with Syllabus -->
+                    <div>
+                        <ul class="list-disc pl-6 space-y-3 text-lg leading-relaxed" aria-label="Syllabus Sections">
+                            ${locale.sections.map(section => `
+                                <li>${section.text}
+                                    <ul class="sub-bullet">
+                                        ${section.details.map(detail => `<li>${detail}</li>`).join('')}
+                                    </ul>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Event listener for language change
+        document.getElementById("languageSelect").addEventListener("change", function(event) {
+            currentLanguage = event.target.value;
+            populateSyllabus();
+        });
+
+        // Populate the content initially
+        document.addEventListener("DOMContentLoaded", populateSyllabus);
+    </script>
+
+</body>
+</html>

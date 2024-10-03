@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Cards</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .icon-size {
+            font-size: 1.5rem;
+        }
+        .language-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .language-toggle select {
+            background-color: white;
+            color: black;
+            font-size: 0.9rem;
+            padding: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .pronouns {
+            color: #d16de3; /* Purple color for pronouns */
+            font-size: 0.875rem; /* Slightly smaller font */
+        }
+        .text-left {
+            text-align: left;
+        }
+        .lg\\:w-3\\/4 {
+            width: 75%;
+        }
+        /* New class to align the title and the name inside the card */
+        .title-left {
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-stone-600 text-gray-900 p-1">
+
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+        </select>
+    </div>
+
+    <!-- Placeholder for dynamically loaded content -->
+    <section id="instructor-card" class="shadow-md rounded-lg p-6 mb-4 border border-gray-300">
+        <!-- Title and Name aligned to the left inside the card -->
+        <h2 class="text-3xl font-semibold title-left mb-1 p-4" id="about-title"></h2>
+        <h3 class="text-2xl mb-2 title-left p-4 text-gray-900" id="instructor-name"></h3>
+
+        <!-- Content will be injected here -->
+        <div id="instructor-content"></div>
+    </section>
+
+    <!-- JSON content and JavaScript -->
+    <script>
+        // JSON data including locales for English, French, and Spanish
+        const data = {
+            "en": {
+                "headers": {
+                    "about": "About the Instructor",
+                    "skills": "Skills",
+                    "research": "My Research"
+                },
+                "instructor": {
+                    "name": "Sir John Cleese",
+                    "pronouns": "(He/Him/His)",
+                    "about": "This course is taught by the esteemed Sir John Cleese, an expert in absurdity, master of surrealism, and co-creator of Monty Python’s Flying Circus. With decades of experience in turning the ridiculous into the profound, Sir Cleese will guide you through the nuances of comedic timing, nonsensical dialogue, and why nobody expects the Spanish Inquisition.",
+                    "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669405_1",
+                    "linkedin": "https://www.linkedin.com/in/john-cleese/",
+                    "email": "john.cleese@example.com",
+                    "phone": "+1234567890",
+                    "skills": [
+                        "Crop Burning",
+                        "Sailing"
+                    ],
+                    "research": [
+                        {
+                            "title": "The Absurdity of Comedy",
+                            "description": "A deep dive into the role of absurdity in modern comedy and its impact on audiences.",
+                            "link": "https://www.example.com/absurdity-comedy"
+                        },
+                        {
+                            "title": "Comedic Timing in Surrealism",
+                            "description": "Exploring how timing enhances the absurdity in surrealist comedy.",
+                            "link": "https://www.example.com/comedic-timing"
+                        },
+                        {
+                            "title": "The Impact of Nonsense Dialogues",
+                            "description": "Analyzing the effect of nonsensical dialogues in the audience's perception of humor.",
+                            "link": "https://www.example.com/nonsense-dialogues"
+                        }
+                    ],
+                    "colors": {
+                        "background": "#FFFFFF",
+                        "text": "#d16de3",
+                        "pillBackground": "#d16de3",
+                        "pillText": "#FFFFFF"
+                    }
+                }
+            },
+            "fr": {
+                "headers": {
+                    "about": "À propos de l'instructeur",
+                    "skills": "Compétences",
+                    "research": "Mes recherches"
+                },
+                "instructor": {
+                    "name": "Sir John Cleese",
+                    "pronouns": "(Il/Lui)",
+                    "about": "Ce cours est donné par le très estimé Sir John Cleese, un expert de l'absurde, maître du surréalisme et co-créateur du Monty Python's Flying Circus. Avec des décennies d'expérience à transformer l'absurde en quelque chose de profond, Sir Cleese vous guidera à travers les nuances du timing comique, du dialogue absurde, et pourquoi personne ne s'attend à l'Inquisition espagnole.",
+                    "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669405_1",
+                    "linkedin": "https://www.linkedin.com/in/john-cleese/",
+                    "email": "john.cleese@example.com",
+                    "phone": "+1234567890",
+                    "skills": [
+                        "Brûlage des cultures",
+                        "Navigation"
+                    ],
+                    "research": [
+                        {
+                            "title": "L'Absurdite du Comique",
+                            "description": "Une analyse approfondie du rôle de l'absurdité dans la comédie moderne.",
+                            "link": "https://www.example.com/absurdity-comedy"
+                        },
+                        {
+                            "title": "Le Timing Comique dans le Surréalisme",
+                            "description": "Exploration de l'importance du timing dans la comédie surréaliste.",
+                            "link": "https://www.example.com/comedic-timing"
+                        }
+                    ],
+                    "colors": {
+                        "background": "#FFFFFF",
+                        "text": "#d16de3",
+                        "pillBackground": "#d16de3",
+                        "pillText": "#FFFFFF"
+                    }
+                }
+            },
+            "es": {
+                "headers": {
+                    "about": "Sobre el Instructor",
+                    "skills": "Habilidades",
+                    "research": "Mis Investigaciones"
+                },
+                "instructor": {
+                    "name": "Sir John Cleese",
+                    "pronouns": "(Él)",
+                    "about": "Este curso está impartido por el estimado Sir John Cleese, un experto en el absurdo, maestro del surrealismo y co-creador de Monty Python's Flying Circus. Con décadas de experiencia en convertir lo ridículo en algo profundo, Sir Cleese te guiará a través de los matices del tiempo cómico, diálogos sin sentido y por qué nadie espera la Inquisición Española.",
+                    "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669405_1",
+                    "linkedin": "https://www.linkedin.com/in/john-cleese/",
+                    "email": "john.cleese@example.com",
+                    "phone": "+1234567890",
+                    "skills": [
+                        "Quema de Cultivos",
+                        "Navegación"
+                    ],
+                    "research": [
+                        {
+                            "title": "La Absurdidad de la Comedia",
+                            "description": "Un análisis profundo sobre el rol de la absurdidad en la comedia moderna.",
+                            "link": "https://www.example.com/absurdity-comedy"
+                        }
+                    ],
+                    "colors": {
+                        "background": "#FFFFFF",
+                        "text": "#d16de3",
+                        "pillBackground": "#d16de3",
+                        "pillText": "#FFFFFF"
+                    }
+                }
+            }
+        };
+
+        // Default language
+        let currentLanguage = "en";
+
+        // Function to populate the content dynamically
+        function populateInstructorCard() {
+            const titleElement = document.getElementById("about-title");
+            const nameElement = document.getElementById("instructor-name");
+            const contentElement = document.getElementById("instructor-content");
+            const locale = data[currentLanguage];
+            const instructor = locale.instructor;
+            const colors = instructor.colors;
+
+            // Set the title and name
+            titleElement.textContent = locale.headers.about;
+            titleElement.style.color = colors.text;
+
+            nameElement.textContent = `${instructor.name} ${instructor.pronouns}`;
+
+            // Clear the dynamic content to avoid duplication
+            contentElement.innerHTML = '';
+
+            // Create the HTML structure dynamically and inject it into the content section
+            contentElement.innerHTML += `
+                <div class="flex flex-col lg:flex-row items-center lg:space-x-8 max-w-6xl mx-auto">
+                    <img src="${instructor.image}" alt="Instructor" class="rounded-lg w-40 h-40 mb-6 lg:mb-0 lg:w-48 lg:h-48 shadow-lg object-cover">
+                    <div class="lg:w-3/4 text-left custom-padding">
+
+                        <!-- Contact Information -->
+                        <div class="flex justify-start space-x-4 mb-1 p-4">
+                            <a href="${instructor.linkedin}" target="_blank" class="hover:text-purple-800" style="color:${colors.text}">
+                                <i class="fab fa-linkedin icon-size"></i>
+                            </a>
+                            <a href="mailto:${instructor.email}" class="hover:text-purple-800" style="color:${colors.text}">
+                                <i class="fas fa-envelope icon-size"></i>
+                            </a>
+                            <a href="tel:${instructor.phone}" class="hover:text-purple-800" style="color:${colors.text}">
+                                <i class="fas fa-phone icon-size"></i>
+                            </a>
+                        </div>
+
+                        <!-- Instructor Description -->
+                        <p class="text-lg leading-relaxed text-justify p-4 text-gray-900">
+                            ${instructor.about}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Skills Section placed below the image and description -->
+                <div class="mt-4 p-4 text-left">
+                    <h2 class="text-2xl font-semibold mb-2" style="color:${colors.text}">${locale.headers.skills}</h2>
+                    <div class="flex flex-wrap justify-start gap-2">
+                        ${instructor.skills.map(skill => `<span class="text-sm font-semibold py-2 px-4 rounded-full" style="background-color:${colors.pillBackground}; color:${colors.pillText}">${skill}</span>`).join('')}
+                    </div>
+                </div>
+
+                <!-- My Research Section -->
+                <div class="mt-4 p-4 text-left">
+                    <h2 class="text-2xl font-semibold mb-2" style="color:${colors.text}">${locale.headers.research}</h2>
+                    <div class="flex flex-col space-y-4">
+                        ${instructor.research.map(paper => `
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-book icon-size" style="color:${colors.text}"></i>
+                                <div>
+                                    <span class="text-lg font-semibold">${paper.title}</span>
+                                    <p class="text-sm text-gray-700">${paper.description}</p>
+                                    <a href="${paper.link}" target="_blank" class="hover:text-purple-800 inline-flex items-center" style="color:${colors.text}">
+                                        <i class="fas fa-link icon-size"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Event listener to handle language change
+        document.getElementById("languageSelect").addEventListener("change", function(event) {
+            currentLanguage = event.target.value;
+            populateInstructorCard();
+        });
+
+        // Populate the card initially
+        document.addEventListener("DOMContentLoaded", populateInstructorCard);
+    </script>
+
+</body>
+</html>
