@@ -19,7 +19,12 @@ HTML and Tailwind CSS snippets that improve content layout and appearance in Bla
 
 ### Single Instructor snippet
 
+Large screen view:
+
 ![about instructor large screen](./demo_img/about_instructor_lg.png)
+
+Small screen view:
+
 ![about instructor small screen ](./demo_img/about_instructor_sm.png)
 
 A simple Card to showcase a single/main course instructor, it includes the following customizable elements:
@@ -116,8 +121,13 @@ Now, inside each locale section, these are the elements that can be customized
 
 ### About the course snippet
 
+Large screen view:
+
 ![about instructor large screen](./demo_img/about_course_lg.png)
-![about instructor small screen ](./demo_img/about_course_sm.png)
+
+Small screen view:
+
+![about instructor small screen ](./demo_img/about_course_sm2.png)
 
 A card to provide information and tips about the course, useful to share elements about themes, methodologies, course mechanics... it includes the following customizable elements:
 
@@ -161,6 +171,120 @@ Now, inside each locale section, these are the elements that can be customized
                         "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1"
                     },
                 ]
+```
+
+## Learning outcomes snippet
+
+A simple card to showcase the course´s learning outcomes in bullets and sub-bullets. It features a SVG icon to make it easier to identify the section
+
+Large screen view:
+
+![Learning Outcomes](./demo_img/learning_outcomes_lg.png)
+
+Small screen view:
+
+![Learning outcomes](./demo_img/learning_outcomes_sm.png)
+
+To customize the content, locate the `const = content` json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+
+First, inside `content` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
+
+```json
+"en": {},
+"fr": {},
+"es": {},
+
+```
+
+Now, inside each locale section, these are the elements that can be customized
+
+1.**Card title**. Change "Learning Outcomes" for your desired terminology.
+
+```json
+    "title": "Learning Outcomes",
+```
+
+2.**Outcomes**. Update `text`for the main formulation of the learning outcome and `details` for secondary elements or description
+
+```json
+"outcomes": [
+            {
+            "text": "Master the art of <strong>absurd humor</strong> and explore its societal impact.",
+            "details": [
+            "Explore the evolution of humor through history.",
+            "Understand the importance of timing in comedy."
+            ]
+            },
+            {
+            "text": "Understand how to create comedy through <strong>surreal scenarios</strong> and unexpected turns.",
+            "details": [
+            "Develop an understanding of absurdity in different cultures.",
+            "Learn how to use absurdity in storytelling."
+            ]
+            }
+            ]
+```
+
+3.**Card colors**. Customize the colors as desired. Use tailwind colors or regular colors.
+
+```json
+    "colors": {
+        "background": "bg-stone-600",  // gray for the background
+        "text": "#FFFFFF",         // White text
+        "cardBackground": "#FFFFFF", // White card background
+        "cardText": "#000000",       // Black text for the card
+        "border": "gray-300"          // Border color for the card
+        },
+```
+
+## Syllabus snippet
+
+Large screen view:
+
+![Syllabus](./demo_img/syllabus_lg.png)
+
+Small screen view:
+
+![Syllabus](./demo_img/syllabus_sm.png)
+
+To customize the content, locate the `const = SyllabusContent` json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+
+First, inside `content` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
+
+```json
+"en": {},
+"fr": {},
+"es": {},
+
+```
+
+Now, inside each locale section, these are the elements that can be customized
+
+1.**Card title**. Change "Syllabus" for your desired terminology.
+
+```json
+    "title": "Syllabus",
+```
+
+2.**Content sections**. As as many sections as you need by providing `text`for the main content and `details` for sub-bullets or descriptions.
+
+```json
+        "sections": [
+            {
+                "text": "Introduction to Absurdity",
+                "details": [
+                    "An overview of surreal humor.",
+                    "Examples of absurdity in different cultures."
+                    ]
+            },
+            {
+                "text": "Creating Surreal Comedy",
+                "details": [
+                    "Explore comedic timing in surreal humor.",
+                    "How to blend the unexpected with meaningful content."
+                    ]
+            }
+        ]
 ```
 
 ## Known limitations
