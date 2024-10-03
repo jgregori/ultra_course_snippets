@@ -229,11 +229,11 @@ Now, inside each locale section, these are the elements that can be customized
 
 ```json
     "colors": {
-        "background": "bg-stone-600",  // gray for the background
-        "text": "#FFFFFF",         // White text
-        "cardBackground": "#FFFFFF", // White card background
-        "cardText": "#000000",       // Black text for the card
-        "border": "gray-300"          // Border color for the card
+        "background": "bg-stone-600",  
+        "text": "#FFFFFF",         
+        "cardBackground": "#FFFFFF", 
+        "cardText": "#000000",       
+        "border": "gray-300"         
         },
 ```
 
@@ -285,6 +285,18 @@ Now, inside each locale section, these are the elements that can be customized
                     ]
             }
         ]
+```
+
+3.**Card colors**. Customize the colors as desired. Use tailwind colors or regular colors.
+
+```json
+    "colors": {
+        "background": "bg-stone-600",  
+        "text": "#FFFFFF",         
+        "cardBackground": "#FFFFFF", 
+        "cardText": "#000000",       
+        "border": "gray-300"         
+        },
 ```
 
 ## Known limitations
