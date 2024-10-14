@@ -15,6 +15,12 @@ HTML and Tailwind CSS snippets that improve content layout and appearance in Bla
 3. Add your data (check each component for more information).
 4. Tweak colors or modify the snippet as needed.
 
+## ChatGPT prompts (Work in progress)
+
+Alongside each html file you will find a _prompt.txt file. This is intended for end users to be able to generate and customize snippets with their own data via chatGPT
+
+To use it, simply fill in the template and run the propmt through chatGPT.
+
 ## Snippets
 
 ### Single Instructor snippet
@@ -239,6 +245,8 @@ Now, inside each locale section, these are the elements that can be customized
 
 ## Syllabus snippet
 
+A simple card to showcase the course´s syllabus in bullets and sub-bullets. It features a SVG icon to make it easier to identify the section.
+
 Large screen view:
 
 ![Syllabus](./demo_img/syllabus_lg.png)
@@ -297,6 +305,66 @@ Now, inside each locale section, these are the elements that can be customized
         "cardText": "#000000",       
         "border": "gray-300"         
         },
+```
+
+## FAQ Snippet
+
+An accordion card to showcase the course´s frequently asked questions.
+
+Larger screen view
+
+![Syllabus](./demo_img/faq_lg.png)
+
+Small screen view
+
+![Syllabus](./demo_img/faq_sm.png)
+
+To customize the content, locate the `const = faqContent` json around line 64 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+
+First, inside `faqContent` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
+
+```json
+"en": {},
+"fr": {},
+"es": {},
+```
+
+Now, inside each locale section, these are the elements that can be customized
+
+1. **Card title**. Change `title` to your preffered terminology.
+
+```json
+    "en": {
+            "title": "Frequently Asked Questions",
+```
+
+2. **FAQ content**. Change this section to add `question` and its respective `answer`
+   
+```json
+            "faqs": [
+                {
+                "question": "What is absurd humor?",
+                "answer": "Absurd humor is a form of comedy that relies on illogical or nonsensical situations."
+                },
+                {
+                "question": "How can I create surreal comedy?",
+                "answer": "Surreal comedy blends unexpected scenarios with meaningful commentary. Timing is crucial."
+                    }
+                ]
+            },
+```
+
+3.**Color Section**. Change this section to add different colours to the card.
+
+```json
+            "colors": {
+                "background": "#d16de3",  // Purple for the background
+                "text": "#FFFFFF",         // White text
+                "cardBackground": "#FFFFFF", // White card background
+                "cardText": "#000000",       // Black text for the card
+                "border": "#ad4bb4"          // Border color for the card
+            },
+
 ```
 
 ## Known limitations
