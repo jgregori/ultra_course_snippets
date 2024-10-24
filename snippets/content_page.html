@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monty Python Course</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-custom-purple {
+            background-color: #a234b5;
+        }
+        .text-custom-purple {
+            color: #a234b5;
+        }
+        .border-custom-purple {
+            border-color: #ad4bb4;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 p-0">
+
+    <!-- Course Overview Section -->
+    <section id="course-overview" class="text-white mb-4 rounded-lg shadow-md bg-custom-purple w-full p-12" role="region" aria-labelledby="overviewTitle">
+        
+        <!-- Language Picker (Visible, solid white select element) -->
+        <div class="absolute top-2 right-2 z-50">
+            <select id="languageSelect" aria-label="Select language" class="bg-white text-black rounded-md py-1 px-2">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
+        <h2 class="text-4xl font-semibold mb-4 text-center" id="overviewTitle">Welcome to the Monty Python Course</h2>
+        <p class="text-lg text-center mb-6" id="overviewDescription">In this course, you’ll explore the absurd, hilarious, and utterly brilliant world of Monty Python. From the dead parrots to lumberjacks, be prepared for a wild ride through classic British comedy.</p>
+    </section>
+
+    <!-- Course Content Section -->
+    <section id="course-content" class="w-full" role="region" aria-labelledby="courseSectionsTitle">
+        <!-- Dynamic content will be injected here -->
+    </section>
+
+    <!-- JSON data and JavaScript -->
+    <script>
+        const contentData = {
+            "colors": {
+                "cardBackground": "#FFFFFF",  
+                "cardText": "#000000",        
+                "cardBorder": "#ad4bb4",      
+                "titleColor": "#d16de3"       
+            },
+            "en": {
+                "overview": {
+                    "title": "Welcome to the Monty Python Course",
+                    "description": "In this course, you’ll explore the absurd, hilarious, and utterly brilliant world of Monty Python. From the dead parrots to lumberjacks, be prepared for a wild ride through classic British comedy."
+                },
+                "sections": [
+                    {
+                        "title": "The Dead Parrot Sketch",
+                        "description": "In this section, you'll dive deep into the famous 'Dead Parrot' sketch. Why is it so funny when a parrot is obviously no more? You'll find out! This sketch revolves around a pet shop owner who refuses to admit the parrot is dead, insisting instead that it's 'resting.'",
+                        "description2": "You'll explore the themes of denial, absurdity, and the quintessential British humor that make this one of Monty Python's most beloved sketches. We'll also discuss why dead animals are such a recurring theme in their comedy.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1",
+                        "layout": "alt-right"
+                    },
+                    {
+                        "title": "Spam, Spam, Spam",
+                        "description": "Ever wondered why we call junk email 'spam'? This sketch from Monty Python might have something to do with it. In a café that serves nothing but spam, a couple attempts to order something else, only to be drowned out by a chorus of 'Spam, spam, spam!'",
+                        "description2": "We'll delve into the cultural impact of the 'Spam' sketch, and how it unintentionally gave its name to internet spam. Discover why repetition is such a powerful comedic tool and how this sketch has influenced modern humor.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1",
+                        "layout": "alt-left"
+                    },
+                    {
+                        "title": "The Spanish Inquisition",
+                        "description": "Nobody expects the Spanish Inquisition! This iconic phrase has transcended its original sketch and is now a part of pop culture. The sudden and absurd appearance of the Inquisition, complete with ridiculous torture devices, creates a surprise element crucial to the comedy.",
+                        "description2": "In this section, we'll explore how Monty Python used historical references and extreme exaggeration to make their sketches stand out. The 'Spanish Inquisition' sketch remains one of their most quoted, and we'll break down the reasons for its enduring popularity.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1",
+                        "layout": "alt-right"
+                    }
+                ]
+            },
+            "es": {
+                "overview": {
+                    "title": "Bienvenido al Curso de Monty Python",
+                    "description": "En este curso, explorarás el mundo absurdo, hilarante y absolutamente brillante de Monty Python. Desde los loros muertos hasta los leñadores, prepárate para una aventura salvaje a través de la comedia británica clásica."
+                },
+                "sections": [
+                    {
+                        "title": "El Sketch del Loro Muerto",
+                        "description": "En esta sección, profundizarás en el famoso sketch del 'Loro Muerto'. ¿Por qué es tan divertido cuando un loro obviamente ya no está vivo? ¡Lo descubrirás! Este sketch gira en torno a un dueño de tienda de mascotas que se niega a admitir que el loro está muerto, insistiendo en que está 'descansando'.",
+                        "description2": "Explorarás los temas de la negación, el absurdo y el humor británico por excelencia que hacen de este uno de los sketches más queridos de Monty Python.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1",
+                        "layout": "alt-right"
+                    },
+                    {
+                        "title": "Spam, Spam, Spam",
+                        "description": "¿Alguna vez te has preguntado por qué llamamos spam a los correos no deseados? Este sketch de Monty Python podría tener algo que ver con ello. En un café que solo sirve spam, una pareja intenta pedir otra cosa, solo para ser ahogados por un coro de '¡Spam, spam, spam!'",
+                        "description2": "Nos sumergiremos en el impacto cultural del sketch de 'Spam' y cómo dio su nombre al spam de internet.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1",
+                        "layout": "alt-left"
+                    },
+                    {
+                        "title": "La Inquisición Española",
+                        "description": "¡Nadie espera la Inquisición Española! Esta frase icónica ha trascendido su sketch original y ahora es parte de la cultura pop.",
+                        "description2": "Exploraremos cómo Monty Python usó referencias históricas y exageraciones extremas para hacer que sus sketches fueran inolvidables.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1",
+                        "layout": "alt-right"
+                    }
+                ]
+            },
+            "fr": {
+                "overview": {
+                    "title": "Bienvenue dans le Cours Monty Python",
+                    "description": "Dans ce cours, vous explorerez l'absurde, l'hilarant et le monde brillamment fou de Monty Python. Des perroquets morts aux bûcherons, préparez-vous à une aventure à travers la comédie britannique classique."
+                },
+                "sections": [
+                    {
+                        "title": "Le Sketch du Perroquet Mort",
+                        "description": "Dans cette section, vous plongerez dans le célèbre sketch du 'Perroquet Mort'. Pourquoi est-ce si drôle quand un perroquet n'est évidemment plus en vie ? Vous le découvrirez ! Ce sketch tourne autour d'un propriétaire de magasin d'animaux qui refuse d'admettre que le perroquet est mort, insistant sur le fait qu'il 'se repose'.",
+                        "description2": "Vous explorerez les thèmes du déni, de l'absurde et de l'humour britannique qui font de ce sketch l'un des plus appréciés de Monty Python.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1",
+                        "layout": "alt-right"
+                    },
+                    {
+                        "title": "Spam, Spam, Spam",
+                        "description": "Vous vous êtes déjà demandé pourquoi nous appelons les courriels indésirables du 'spam' ? Ce sketch de Monty Python pourrait y être pour quelque chose. Dans un café qui ne sert que du spam, un couple tente de commander autre chose, mais est noyé sous un chœur de 'Spam, spam, spam !'.",
+                        "description2": "Nous explorerons l'impact culturel du sketch 'Spam' et comment il a donné son nom au spam sur Internet.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1",
+                        "layout": "alt-left"
+                    },
+                    {
+                        "title": "L'Inquisition Espagnole",
+                        "description": "Personne ne s'attend à l'Inquisition Espagnole ! Cette phrase emblématique a transcendé son sketch original et fait désormais partie de la culture pop.",
+                        "description2": "Nous découvrirons comment Monty Python a utilisé des références historiques et des exagérations extrêmes pour rendre leurs sketches inoubliables.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669409_1",
+                        "layout": "alt-right"
+                    }
+                ]
+            }
+        };
+
+        let currentLanguage = "en";
+
+        function populateContent() {
+            const overviewSection = document.getElementById("overviewTitle");
+            const descriptionSection = document.getElementById("overviewDescription");
+            const contentSection = document.getElementById("course-content");
+            const locale = contentData[currentLanguage];
+            const colors = contentData.colors;
+
+            // Update the overview section
+            overviewSection.textContent = locale.overview.title;
+            descriptionSection.textContent = locale.overview.description;
+
+            // Populate the course sections
+            contentSection.innerHTML = locale.sections.map((section) => `
+                <div class="mb-4 border rounded-lg p-6 shadow-md w-full" style="background-color: ${colors.cardBackground}; color: ${colors.cardText}; border-color: ${colors.cardBorder};" role="region" aria-labelledby="${section.title.replace(/\s+/g, '-')}">
+                    <h3 class="text-2xl font-semibold mb-4" id="${section.title.replace(/\s+/g, '-')} style="color: ${colors.titleColor};">${section.title}</h3>
+                    <div class="flex flex-col md:${section.layout === 'alt-left' ? 'flex-row-reverse' : 'flex-row'} items-center">
+                        <img src="${section.image}" alt="${section.title}" class="w-24 h-24 sm:w-32 sm:h-32 mb-4 md:mb-0 rounded-lg object-cover ${section.layout === 'alt-left' ? 'md:ml-6' : 'md:mr-6'}">
+                        <div class="w-full text-justify">
+                            <p class="mb-2">${section.description}</p>
+                            <p>${section.description2}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById("languageSelect").addEventListener("change", function(event) {
+            currentLanguage = event.target.value;
+            populateContent();
+        });
+
+        document.addEventListener("DOMContentLoaded", populateContent);
+    </script>
+
+</body>
+</html>

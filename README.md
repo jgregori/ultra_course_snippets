@@ -15,12 +15,6 @@ HTML and Tailwind CSS snippets that improve content layout and appearance in Bla
 3. Add your data (check each component for more information).
 4. Tweak colors or modify the snippet as needed.
 
-## ChatGPT prompts (Work in progress)
-
-Alongside each html file you will find a _prompt.txt file. This is intended for end users to be able to generate and customize snippets with their own data via chatGPT
-
-To use it, simply fill in the template and run the propmt through chatGPT.
-
 ## Snippets
 
 ### Single Instructor snippet
@@ -44,7 +38,7 @@ A simple Card to showcase a single/main course instructor, it includes the follo
 7. **Instructor skills/specialities**
 8. **Link to research articles**
 
-To customize the content, locate the `const = data` json around line 69 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+To customize the content, locate the `const = data` variable in the json around line 69 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
 
 First, inside `data` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
 
@@ -79,6 +73,7 @@ Now, inside each locale section, these are the elements that can be customized
                         "linkedin": "https://www.linkedin.com/in/john-cleese/",
                         "email": "john.cleese@example.com",
                         "phone": "+1234567890",
+                    }
     ```
 
 3. **Skills Section**. Add skills to the skills dictionary to have then displayed as pills in the card.
@@ -142,7 +137,7 @@ A card to provide information and tips about the course, useful to share element
 3. **Description**
 4. **sections**
 
-To customize the content, locate the `const = course_content` json around line 62 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+To customize the content, locate the `const = course_content` variable in the json around line 62 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
 
 First, inside `course_content` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
 
@@ -202,7 +197,7 @@ Small screen view:
 
 ![Learning outcomes](./demo_img/learning_outcomes_sm.png)
 
-To customize the content, locate the `const = content` json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+To customize the content, locate the `const = content` variable in the json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
 
 First, inside `content` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
 
@@ -266,7 +261,7 @@ Small screen view:
 
 ![Syllabus](./demo_img/syllabus_sm.png)
 
-To customize the content, locate the `const = SyllabusContent` json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+To customize the content, locate the `const = SyllabusContent` variable in the json around line 55 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
 
 First, inside `content` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
 
@@ -330,7 +325,7 @@ Small screen view
 
 ![Syllabus](./demo_img/faq_sm.png)
 
-To customize the content, locate the `const = faqContent` json around line 64 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+To customize the content, locate the `const = faqContent` variable in the json around line 64 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
 
 First, inside `faqContent` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
 
@@ -377,6 +372,62 @@ Now, inside each locale section, these are the elements that can be customized
             },
 
 ```
+
+## Content page
+
+A simple content page divided in a header with a solid background and content sections with text and pictures.
+
+![Content page](./demo_img/content_page_lg.png)
+
+Small screen view
+
+![Content page](./demo_img/content_page_sm.png)
+
+To customize the content, locate the `const = contentData` variable in the json around line 64 of the file. I have kept everything in a single file be able to use it directly in an Ultra document.
+
+First, inside `contentData` there is a section for each language, different languages can have different contents. More locales can be added, but you will need to add the new locale to the language toogle so the option becomes available.
+
+```json
+"en": {},
+"fr": {},
+"es": {},
+```
+
+Now, inside each locale section, these are the elements that can be customized
+
+1. **Overview section**. Add your wording for `title` and `description`
+
+```json
+            "en": {
+                "overview": {
+                    "title": "Welcome to the Monty Python Course",
+                    "description": "In this course, you’ll explore the absurd, hilarious, and utterly brilliant world of Monty Python. From the dead parrots to lumberjacks, be prepared for a wild ride through classic British comedy."
+                },
+```
+
+2. **Sections**. For each one of the content sections add `title`, `description`, `description 2`  (for a second paragraph), an url for the `image`, and the `layout` where `alt-right` indicates right alignment and `alt-left` indicates left alignment.
+
+```json
+                    {
+                        "title": "The Dead Parrot Sketch",
+                        "description": "In this section, you'll dive deep into the famous 'Dead Parrot' sketch. Why is it so funny when a parrot is obviously no more? You'll find out! This sketch revolves around a pet shop owner who refuses to admit the parrot is dead, insisting instead that it's 'resting.'",
+                        "description2": "You'll explore the themes of denial, absurdity, and the quintessential British humor that make this one of Monty Python's most beloved sketches. We'll also discuss why dead animals are such a recurring theme in their comedy.",
+                        "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669412_1",
+                        "layout": "alt-right"
+                    },
+```
+
+3. **Colors**. Customize the color values to personalize the card, you can use tailwind colors or regular color codes.
+
+```json
+        "colors": {
+                "cardBackground": "#FFFFFF",  
+                "cardText": "#000000",        
+                "cardBorder": "#ad4bb4",      
+                "titleColor": "#d16de3"       
+            },
+```
+
 
 ## Known limitations
 
