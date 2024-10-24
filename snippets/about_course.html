@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Course Cards</title>
     <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -11,40 +11,14 @@
         .bg-python-purple {
             background-color: #d16de3;
         }
-        .bg-card-offwhite {
-            background-color: #FFFFFF; /* Subtle off-white */
-        }
-        .text-python-purple {
-            color: #d16de3;
-        }
-        .language-toggle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #d16de3;
-            padding: 8px;
-            border-radius: 8px;
-        }
-        .language-toggle select {
-            background-color: white;
-            color: black;
-            font-size: 1rem;
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-        }
-        .language-toggle label {
-            color: white;
-            font-weight: bold;
-        }
     </style>
 </head>
-<body class="bg-stone-600 text-gray-900 p-1">
+<body class="bg-python-purple text-gray-900">
 
     <!-- Language Toggle -->
-    <div class="language-toggle" role="region" aria-labelledby="languageSelectLabel">
-        <label id="languageSelectLabel" for="languageSelect">Language:</label>
-        <select id="languageSelect" aria-label="Select language">
+    <div class="absolute top-2 right-2 bg-white bg-opacity-20 p-2 rounded-md" role="region" aria-labelledby="languageSelectLabel">
+        <label id="languageSelectLabel" for="languageSelect" class="sr-only">Select language:</label>
+        <select id="languageSelect" aria-label="Select language" class="bg-white text-black rounded-md py-1 px-2">
             <option value="en">English</option>
             <option value="es">Español</option>
             <option value="fr">Français</option>
@@ -52,7 +26,7 @@
     </div>
 
     <!-- How the Course Works Section (dynamically populated) -->
-    <section id="course-info" class="bg-python-purple shadow-md rounded-lg p-6 text-white mb-4" role="region" aria-labelledby="courseTitle">
+    <section id="course-info" class="shadow-md rounded-lg bg-python-purple text-white w-full mb-4 pt-10 p-6" role="region" aria-labelledby="courseTitle">
         <!-- Content will be injected here -->
     </section>
 
@@ -60,6 +34,11 @@
     <script>
         // JSON data with translations for English, Spanish, and French
         const courseContent = {
+            "colors": {
+                "cardBackground": "#FFFFFF",  
+                "cardText": "#000000",        
+                "cardBorder": "#d16de3"       
+            },
             "en": {
                 "title": "How the Course Works",
                 "description": "You might think this course would be typical. But, to quote the Spanish Inquisition: \"Nobody expects...\" well, anything in this course to be typical. Each week, you will be introduced to new absurdities, surprise lessons, and sudden diversions (like a discussion about coconuts). Be prepared to laugh, analyze, and eventually create your own Monty Python-inspired content.",
@@ -147,6 +126,7 @@
         function populateCourseContent() {
             const courseSection = document.getElementById("course-info");
             const locale = courseContent[currentLanguage];
+            const colors = courseContent.colors;
 
             // Clear previous content
             courseSection.innerHTML = '';
@@ -155,13 +135,13 @@
             courseSection.innerHTML += `
                 <h2 class="text-4xl font-semibold mb-6 text-center" id="courseTitle" aria-label="${locale.title}">${locale.title}</h2>
                 <p class="text-lg leading-relaxed text-center mb-6">${locale.description}</p>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl mx-auto" role="list" aria-label="Course Features">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" role="list" aria-label="Course Features">
                     ${locale.sections.map(section => `
-                        <div class="flex flex-col lg:flex-row items-center bg-card-offwhite text-black rounded-lg p-6 shadow-md" role="listitem" aria-label="${section.title}">
+                        <div class="flex flex-col lg:flex-row items-center rounded-lg p-6 shadow-md overflow-hidden" style="background-color: ${colors.cardBackground}; color: ${colors.cardText}; border-color: ${colors.cardBorder};" role="listitem" aria-labelledby="${section.title}">
                             <img src="${section.image}" alt="${section.title}" class="w-24 h-24 sm:w-32 sm:h-32 mb-4 rounded-lg lg:mb-0 lg:mr-6 object-cover" aria-hidden="true">
                             <div>
-                                <h3 class="text-xl font-bold">${section.title}</h3>
-                                <p>${section.description}</p>
+                                <h3 class="text-xl font-bold" aria-label="Section Title">${section.title}</h3>
+                                <p aria-describedby="sectionDescription">${section.description}</p>
                             </div>
                         </div>
                     `).join('')}

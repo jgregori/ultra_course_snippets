@@ -90,7 +90,7 @@ Now, inside each locale section, these are the elements that can be customized
                         ],
     ```
 
-4. **Research section**. Add as many research papers as desired, providing `title`,`description` and `link` 
+4. **Research section**. Add as many research papers as desired, providing `title`,`description` and `link`
 
     ```json
                         "research": [
@@ -156,13 +156,13 @@ First, inside `course_content` there is a section for each language, different l
 Now, inside each locale section, these are the elements that can be customized
 
 1. **Title and description**
-   
+
 ```json
                "title": "How the Course Works",
                 "description": "You might think this course would be typical. But, to quote the Spanish Inquisition: \"Nobody expects...\" well, anything in this course to be typical. Each week, you will be introduced to new absurdities, surprise lessons, and sudden diversions (like a discussion about coconuts). Be prepared to laugh, analyze, and eventually create your own Monty Python-inspired content.",
 ```
 
-2.**Content sections**. Add as many content sections as you wish, providing `title`,`description`,`image` for each section.
+2. **Content sections**. Add as many content sections as you wish, providing `title`,`description`,`image` for each section.
 
 ```json
                 "sections": [
@@ -177,6 +177,17 @@ Now, inside each locale section, these are the elements that can be customized
                         "image": "https://ultra.elearningmedia.es/bbcswebdav/xid-669415_1"
                     },
                 ]
+```
+
+3. **Card colors**. Change the colors of the card accordingly in the colors section of the json.
+
+```json
+            {
+            "colors": {
+                "cardBackground": "#FFFFFF",  
+                "cardText": "#000000",        
+                "cardBorder": "#d16de3"      
+            }
 ```
 
 ## Learning outcomes snippet
@@ -339,7 +350,7 @@ Now, inside each locale section, these are the elements that can be customized
 ```
 
 2. **FAQ content**. Change this section to add `question` and its respective `answer`
-   
+
 ```json
             "faqs": [
                 {
@@ -358,11 +369,11 @@ Now, inside each locale section, these are the elements that can be customized
 
 ```json
             "colors": {
-                "background": "#d16de3",  // Purple for the background
-                "text": "#FFFFFF",         // White text
-                "cardBackground": "#FFFFFF", // White card background
-                "cardText": "#000000",       // Black text for the card
-                "border": "#ad4bb4"          // Border color for the card
+                "background": "#d16de3",  
+                "text": "#FFFFFF",         
+                "cardBackground": "#FFFFFF", 
+                "cardText": "#000000",       
+                "border": "#ad4bb4"          
             },
 
 ```
@@ -373,4 +384,3 @@ Now, inside each locale section, these are the elements that can be customized
 2. This version imports font-awesome icons from a CDN.
 3. Images need to be stored somewhere, these are currently hosted in the content collection in Learn.
 4. Examples are very silly.
-
