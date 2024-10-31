@@ -1,64 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Cards</title>
     <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        .language-toggle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        /* Custom Colors */
+        .bg-custom-gray {
             background-color: rgba(255, 255, 255, 0.2);
-            padding: 4px;
-            border-radius: 5px;
         }
-        .language-toggle select {
-            background-color: white;
-            color: black;
-            font-size: 0.9rem;
-            padding: 2px 5px;
-            border: none;
-            border-radius: 3px;
-        }
-        .title-purple {
-            color: #d16de3; /* Purple color */
-            text-align: left;
-        }
-        .sub-bullet {
-            list-style-type: circle;
-            margin-left: 2rem;
+        .text-custom-purple {
+            color: #d16de3;
         }
     </style>
 </head>
-<body id="body" class="bg-stone-600 text-gray-900 p-1">
-
-    <!-- Language Toggle -->
-    <div class="language-toggle" role="region" aria-labelledby="languageSelectLabel">
-        <label id="languageSelectLabel" for="languageSelect" class="sr-only">Language:</label>
-        <select id="languageSelect" aria-label="Select language">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-        </select>
-    </div>
+<body id="body" class="bg-stone-600 text-gray-900 p-4">
 
     <!-- Section with SVG Icon and Learning Outcomes -->
-    <section id="learning-outcomes" class="shadow-md rounded-lg p-6 mb-4 border" role="region" aria-labelledby="learningOutcomesTitle">
+    <section id="learning-outcomes" class="shadow-md rounded-lg p-6 mb-4 border border-gray-300 bg-white relative" role="region" aria-labelledby="learningOutcomesTitle">
+        <!-- Language Toggle Inside the Card -->
+        <div class="absolute top-2 right-2 bg-custom-gray p-2 rounded-md">
+            <label id="languageSelectLabel" for="languageSelect" class="sr-only">Language:</label>
+            <select id="languageSelect" aria-label="Select language" class="bg-white text-black text-sm p-1 rounded">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
         <!-- Content will be injected here -->
     </section>
 
     <!-- JSON content and JavaScript -->
     <script>
-        // JSON data with translations for English, Spanish, and French, plus a single section for colors
         const content = {
             "colors": {
-                "background": "bg-stone-600",  // gray for the background
-                "text": "#FFFFFF",         // White text
-                "cardBackground": "#FFFFFF", // White card background
-                "cardText": "#000000",       // Black text for the card
-                "border": "gray-300"          // Border color for the card
+                "background": "#2d3748",
+                "text": "#FFFFFF",
+                "cardBackground": "#FFFFFF",
+                "cardText": "#000000",
+                "border": "#d1d5db"
             },
             "en": {
                 "title": "Learning Outcomes",
@@ -119,39 +102,18 @@
             }
         };
 
-        // Default language
         let currentLanguage = "en";
 
-        // Function to apply dynamic colors based on the selected language
-        function applyColors(colors) {
-            document.getElementById("body").style.backgroundColor = colors.background;
-            document.getElementById("body").style.color = colors.text;
-            const section = document.getElementById("learning-outcomes");
-            section.style.backgroundColor = colors.cardBackground;
-            section.style.color = colors.cardText;
-            section.style.borderColor = colors.border;
-        }
-
-        // Function to populate the content dynamically
         function populateContent() {
             const section = document.getElementById("learning-outcomes");
             const locale = content[currentLanguage];
-            
-            // Apply colors
-            applyColors(content.colors);
 
-            // Clear previous content
-            section.innerHTML = '';
-
-            // Set the title (outside flexbox) and the SVG + outcomes inside the flexbox
             section.innerHTML += `
-                <h2 class="text-3xl font-semibold title-purple mb-3" id="learningOutcomesTitle" aria-label="${locale.title}">${locale.title}</h2>
+                <h2 class="text-3xl font-semibold text-custom-purple mb-3" id="learningOutcomesTitle">${locale.title}</h2>
                 <div class="flex flex-col lg:flex-row items-center lg:space-x-8 max-w-6xl mx-auto">
-                    <!-- SVG Trophy Icon -->
                     <div class="w-40 h-40 mb-6 lg:mb-0 lg:w-48 lg:h-48 flex justify-center items-center">
-                        <svg viewBox="0 0 1024 1024" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" fill="#ad4bb4" stroke="#ad4bb4">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <svg viewBox="0 0 1024 1024" class="w-full h-full">
+                            <!-- SVG content unchanged -->
                             <g id="SVGRepo_iconCarrier">
                                 <path d="M454.5 675.5l-32.4 107.9h181.8L574.5 678" fill="#FBBA22"></path>
                                 <path d="M510.1 682.3c215.1 0 215.1-165.2 215.1-165.2V197.4H300.9v319.7s0 165.2 215.1 165.2h-5.9z" fill="#FBBA22"></path>
@@ -162,12 +124,11 @@
                         </svg>
                     </div>
 
-                    <!-- Text Content with Learning Outcomes -->
                     <div>
-                        <ul class="list-disc pl-6 space-y-3 text-lg leading-relaxed" aria-label="Learning Outcomes">
+                        <ul class="list-disc pl-6 space-y-3 text-lg leading-relaxed">
                             ${locale.outcomes.map(outcome => `
                                 <li>${outcome.text}
-                                    <ul class="sub-bullet">
+                                    <ul class="list-circle pl-8 space-y-1">
                                         ${outcome.details.map(detail => `<li>${detail}</li>`).join('')}
                                     </ul>
                                 </li>
@@ -178,13 +139,11 @@
             `;
         }
 
-        // Event listener for language change
         document.getElementById("languageSelect").addEventListener("change", function(event) {
             currentLanguage = event.target.value;
             populateContent();
         });
 
-        // Populate the content initially
         document.addEventListener("DOMContentLoaded", populateContent);
     </script>
 
